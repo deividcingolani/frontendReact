@@ -112,7 +112,7 @@ function Form({ cardSelected, setViewForm, setDataCards, dataCards }) {
           Back to Catalog
         </button>
         <button className={styles.button} onClick={() => handlerUpdateMovie()}>
-          Update/Create Movie
+          Update
         </button>
       </div>
     </div>
