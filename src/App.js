@@ -1,4 +1,4 @@
-import "./app.module.css";
+import "./app.css";
 import Catalog from "./containers/Catalog";
 
 function App() {
