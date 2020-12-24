@@ -4,10 +4,14 @@ import Card from "../components/Card/Card";
 import axios from "axios";
 import Form from "../components/Form/Form";
 import Select from "../components/Select/Select";
+import Paginator from "../components/paginator/paginator";
 function Catalog() {
   const [dataCards, setDataCards] = useState();
   const [viewForm, setViewForm] = useState(false);
   const [dataCardSelected, setCardSelected] = useState(false);
+  const [totalPages, setTotalPages] = useState(0);
+  const [pageActive, setPageActive] = useState(false);
+
   const handleChange = (e) => {
     const key = e.target.value;
     const dataCardsSort = dataCards.sort((a, b) => {
@@ -32,6 +36,12 @@ function Catalog() {
   React.useEffect(() => {
     fetchData();
   }, [fetchData]);
+  React.useEffect(() => {
+    if (dataCards && totalPages === 0) {
+      setTotalPages(Math.ceil(dataCards.length / 20));
+      setPageActive(1);
+    }
+  }, [dataCards]);
 
   if (!dataCards) return <div>Is loading</div>;
 
@@ -64,6 +74,11 @@ function Catalog() {
         handleChange={handleChange}
       />
       <div className={styles.cards}>{cardsRender}</div>
+      <Paginator
+        totalPages={totalPages}
+        pageActive={pageActive}
+        setPageActive={setPageActive}
+      />
     </div>
   );
 }

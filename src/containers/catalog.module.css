@@ -2,9 +2,7 @@
     max-width: 1200px;
     display: grid;
     grid-gap: 1rem;
-    margin-top: 2rem;
-    margin-left: 8rem;
-
+    margin:auto;
 }
 @media (min-width: 300px) {
     .cards { grid-template-columns: repeat(2, 1fr); }
