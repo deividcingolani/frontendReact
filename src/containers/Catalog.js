@@ -127,7 +127,14 @@ function Catalog() {
   if (!dataCards) return <div>Is loading</div>;
 
   if (viewForm)
-    return <Form cardSelected={dataCardSelected} setViewForm={setViewForm} />;
+    return (
+      <Form
+        cardSelected={dataCardSelected}
+        setViewForm={setViewForm}
+        setDataCards={setDataCards}
+        dataCards={dataCards}
+      />
+    );
 
   if (dataCards) {
     return (

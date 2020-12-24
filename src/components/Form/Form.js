@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Form.module.css";
 import axios from "axios";
-function Form({ cardSelected, setViewForm }) {
+function Form({ cardSelected, setViewForm, setDataCards, dataCards }) {
   const [title, setTitle] = useState(cardSelected.title);
   const [description, setDescription] = useState(cardSelected.description);
   const [duration, setDuration] = useState(cardSelected.duration);
@@ -34,6 +34,11 @@ function Form({ cardSelected, setViewForm }) {
       );
       if (status === 200) {
         setSuccess(true);
+        const newDataCards = dataCards.filter(
+          (card) => card.id !== cardSelected.id
+        );
+        newDataCards.push({ ...body, id: cardSelected.id });
+        setDataCards(newDataCards);
       } else {
         setSuccess(false);
       }
