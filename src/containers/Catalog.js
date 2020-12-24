@@ -3,11 +3,11 @@ import styles from "./catalog.module.css";
 import Card from "../components/Card/Card";
 import axios from "axios";
 import Form from "../components/Form/Form";
+import Select from "../components/Select/Select";
 function Catalog() {
   const [dataCards, setDataCards] = useState();
   const [viewForm, setViewForm] = useState(false);
   const [dataCardSelected, setCardSelected] = useState(false);
-
   const handleChange = (e) => {
     const key = e.target.value;
     const dataCardsSort = dataCards.sort((a, b) => {
@@ -46,11 +46,23 @@ function Catalog() {
   }
   return (
     <div>
-      <select name="OrderBy" onChange={(event) => handleChange(event)}>
-        <option value="Title">Title</option>
-        <option value="Duration">Duration</option>
-        <option value="Year">yearOfPublished</option>
-      </select>
+      <Select
+        options={[
+          {
+            name: "Title",
+            label: "Title",
+          },
+          {
+            name: "Duration",
+            label: "Duration",
+          },
+          {
+            name: "yearOfPublished",
+            label: "Date Published",
+          },
+        ]}
+        handleChange={handleChange}
+      />
       <div className={styles.cards}>{cardsRender}</div>
     </div>
   );
