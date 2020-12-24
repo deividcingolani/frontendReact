@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./styles.css";
+import styles from "./styles.module.css";
 import axios from "axios";
 function Form({ cardSelected, setViewForm }) {
   const [title, setTitle] = useState(cardSelected.title);
@@ -43,7 +43,7 @@ function Form({ cardSelected, setViewForm }) {
           className={styles.inputForm}
         />
       </div>
-      <div className={styles.inputForm}>
+      <div className={styles.divInputForm}>
         <label className={styles.label}>Description</label>
 
         <input
@@ -53,7 +53,7 @@ function Form({ cardSelected, setViewForm }) {
           className={styles.inputForm}
         />
       </div>
-      <div className={styles.inputForm}>
+      <div className={styles.divInputForm}>
         <label className={styles.label}>Duration</label>
         <input
           type="number"
@@ -62,7 +62,7 @@ function Form({ cardSelected, setViewForm }) {
           className={styles.inputForm}
         />
       </div>
-      <div className={styles.inputForm}>
+      <div className={styles.divInputForm}>
         <label className={styles.label}>Year Of Published</label>
 
         <input
@@ -74,8 +74,10 @@ function Form({ cardSelected, setViewForm }) {
       </div>
       {error && <div>There was a problem with the update of the data</div>}
       <div className={styles.buttons}>
-        <button onClick={() => setViewForm(false)}>Back to Catalog</button>
-        <button onClick={() => handlerUpdateMovie()}>
+        <button className={styles.button} onClick={() => setViewForm(false)}>
+          Back to Catalog
+        </button>
+        <button className={styles.button} onClick={() => handlerUpdateMovie()}>
           Update/Create Movie
         </button>
       </div>
