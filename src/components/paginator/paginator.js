@@ -2,7 +2,6 @@ import styles from "./paginator.module.css";
 function Paginator({ totalPages, pageActive, setPageActive }) {
   const renderPages = [];
   for (let i = 1; i < totalPages + 1; i++) {
-    console.log(i === pageActive);
     renderPages.push(
       <a
         key={i}
@@ -14,7 +13,6 @@ function Paginator({ totalPages, pageActive, setPageActive }) {
       </a>
     );
   }
-  console.log(totalPages);
   if (totalPages === 0) return null;
   if (totalPages > 0) {
     return (

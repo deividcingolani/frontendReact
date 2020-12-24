@@ -41,7 +41,12 @@ function Catalog() {
       setTotalPages(Math.ceil(dataCards.length / 20));
       setPageActive(1);
     }
-  }, [dataCards]);
+  }, [totalPages, dataCards]);
+  React.useEffect(() => {
+    if (pageActive != 0) {
+      console.log("calculate data for this page");
+    }
+  }, [pageActive]);
 
   if (!dataCards) return <div>Is loading</div>;
 
@@ -49,7 +54,12 @@ function Catalog() {
     return <Form cardSelected={dataCardSelected} setViewForm={setViewForm} />;
 
   const cardsRender = [];
-  for (let i = 0; i < 20; i++) {
+  const firstItemOfPageActive = (pageActive - 1) * 20;
+  let lastItemOfPageActive = pageActive * 20;
+  if (lastItemOfPageActive > dataCards.length) {
+    lastItemOfPageActive = dataCards.length;
+  }
+  for (let i = firstItemOfPageActive; i < lastItemOfPageActive; i++) {
     cardsRender.push(
       <Card key={i} dataCard={dataCards[i]} onHandler={onHandler} />
     );
