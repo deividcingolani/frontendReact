@@ -61,7 +61,6 @@ function Catalog() {
        });
        console.log(dataCardsSort);
        setDataCards(dataCardsSort);     }
-
   };
 
   if (!dataCards) return <div>Is loading</div>;

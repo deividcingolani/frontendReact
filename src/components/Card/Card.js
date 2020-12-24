@@ -5,6 +5,9 @@ import movie from "../../assets/photo.jpeg";
 import christmas from "../../assets/christmas.jpeg";
 import spartanos from "../../assets/spartanos.jpeg";
 import soccer from "../../assets/soccer.jpeg";
+import batman from "../../assets/batman.jpeg";
+import flash from "../../assets/flash.jpeg";
+import robin from "../../assets/robin.jpeg";
 
 function getSrc(random) {
     switch (true) {
@@ -16,6 +19,12 @@ function getSrc(random) {
         return christmas
       case (random === 4):
         return soccer
+      case (random === 5):
+        return batman
+      case (random === 6):
+        return flash
+      case (random === 7):
+        return robin
     default:
       return soccer
     }
@@ -25,8 +34,9 @@ function getSrc(random) {
 function Catalog({ dataCard, onHandler }) {
   const [viewImg, setViewImg] = useState(true);
   const [random, setRandom] = useState(1);
+
 useEffect(()=>{
-  setRandom(Math.floor(Math.random() * 5) + 1 )
+  setRandom(Math.floor(Math.random() * 7) + 1 )
 },[setRandom])
   return (
     <div>
