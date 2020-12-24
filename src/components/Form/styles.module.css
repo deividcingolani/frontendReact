@@ -37,4 +37,6 @@
 .errorInput{
   font-size: 16px;
   margin-top: 1rem;
+  font-weight: bold;
+  color: #E91E63;
 }
