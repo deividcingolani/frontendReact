@@ -10,6 +10,7 @@ function Form({ cardSelected, setViewForm }) {
   );
   const [validateField, setValidateField] = useState(false);
   const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handlerUpdateMovie = async () => {
     if (
@@ -19,6 +20,7 @@ function Form({ cardSelected, setViewForm }) {
       yearOfPublished > new Date().getFullYear()
     ) {
       setValidateField(true);
+      setError(true);
     } else {
       const body = {
         title,
@@ -32,8 +34,10 @@ function Form({ cardSelected, setViewForm }) {
         body
       );
       if (status === 200) {
-        setViewForm(false);
+        setSuccess(true);
+        setError(false);
       } else {
+        setSuccess(false);
         setError(true);
       }
     }
@@ -97,7 +101,10 @@ function Form({ cardSelected, setViewForm }) {
           </div>
         )}
       </div>
-      {error && <div>There was a problem with the update of the data</div>}
+      {success && (
+        <div className={styles.messageSuccess}>The update was Successfully</div>
+      )}
+
       <div className={styles.buttons}>
         <button className={styles.button} onClick={() => setViewForm(false)}>
           Back to Catalog
