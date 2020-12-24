@@ -4,12 +4,29 @@ import styles from "./card.module.css";
 import movie from "../../assets/photo.jpeg";
 import christmas from "../../assets/christmas.jpeg";
 import spartanos from "../../assets/spartanos.jpeg";
+import soccer from "../../assets/soccer.jpeg";
+
+function getSrc(random) {
+    switch (true) {
+    case (random === 1):
+      return movie
+      case (random === 2):
+        return spartanos
+      case (random === 3):
+        return christmas
+      case (random === 4):
+        return soccer
+    default:
+      return soccer
+    }
+
+}
 
 function Catalog({ dataCard, onHandler }) {
   const [viewImg, setViewImg] = useState(true);
   const [random, setRandom] = useState(1);
 useEffect(()=>{
-  setRandom(Math.floor(Math.random() * 3) + 1 )
+  setRandom(Math.floor(Math.random() * 5) + 1 )
 },[setRandom])
   return (
     <div>
@@ -41,7 +58,7 @@ useEffect(()=>{
         >
           <div>
             <h4 className={styles.input}> {dataCard.title || "Movie"}</h4>
-            <img src={random===1?movie:random===2?spartanos:christmas } alt="Movie" className={styles.img} />
+            <img src={getSrc(random) } alt="Movie" className={styles.img} />
           </div>
         </div>
         <div
