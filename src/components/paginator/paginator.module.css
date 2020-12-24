@@ -5,15 +5,15 @@
     margin-top: 2rem;
 }
 
-.pagination a {
+.pagination span {
     color: black;
     padding: 8px 16px;
     text-decoration: none;
 }
 
-.pagination a.active {
+.pagination span.active {
     background-color: #4CAF50;
     color: white;
 }
 
-.pagination a:hover:not(.active) {background-color: #ddd;}
+.pagination span:hover:not(.active) {background-color: #ddd;}

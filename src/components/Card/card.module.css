@@ -32,3 +32,11 @@
     margin-bottom: 1rem;
 
 }
+
+.displayNone{
+    display: none;
+}
+
+.displayBlock{
+    display: block;
+}

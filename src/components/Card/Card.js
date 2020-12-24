@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./card.module.css";
+
 import movie from "../../assets/photo.jpeg";
 function Catalog({ dataCard, onHandler }) {
   const [viewImg, setViewImg] = useState(true);
@@ -20,13 +21,28 @@ function Catalog({ dataCard, onHandler }) {
             }, 300);
           }
         }}
+        onMouseOver={(e) => {
+          setViewImg(false);
+        }}
+        onMouseOut={(e) => {
+          setViewImg(true);
+        }}
       >
-        {viewImg ? (
+        <div
+          className={[viewImg ? styles.displayBlock : styles.displayNone].join(
+            " "
+          )}
+        >
           <div>
             <h4 className={styles.input}> {dataCard.title}</h4>
             <img src={movie} alt="Movie" className={styles.img} />
           </div>
-        ) : (
+        </div>
+        <div
+          className={[
+            viewImg === false ? styles.displayBlock : styles.displayNone,
+          ].join(" ")}
+        >
           <div>
             <h4 className={styles.input}>Title: {dataCard.title}</h4>
             <h2 className={styles.input}> Duration: {dataCard.duration} Min</h2>
@@ -40,7 +56,7 @@ function Catalog({ dataCard, onHandler }) {
               View/Edit Detailed
             </button>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
