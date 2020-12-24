@@ -57,9 +57,8 @@ function handleSort(
   return (e) => {
     const key = e.target.value.split("-")[0];
     const typeSorting = e.target.value.split("-")[1];
-    console.log(key);
-    console.log(typeSorting);
-
+    console.log(dataCards);
+    console.log(key, typeSorting);
     if (key !== "Select") {
       let dataCardsSort;
       if (typeSorting === "asc") {
@@ -68,7 +67,7 @@ function handleSort(
         });
       } else {
         dataCardsSort = dataCards.sort((a, b) => {
-          return a[key] < b[key];
+          return a[key] > b[key];
         });
       }
 
@@ -149,11 +148,11 @@ function Catalog() {
               label: "Title Ascendent",
             },
             {
-              name: "duration-asc",
+              name: "duration-desc",
               label: "Duration Descendent",
             },
             {
-              name: "duration-desc",
+              name: "duration-asc",
               label: "Duration Ascendent",
             },
             {
