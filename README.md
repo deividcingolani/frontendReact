@@ -18,7 +18,7 @@ In this case I use yarn, but you can use NPM or other package manager.
 
 3)complete api with data dummy
     
-    yarn run completeDB
+    yarn run completeAPI
 
 
 
