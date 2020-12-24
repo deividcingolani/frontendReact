@@ -34,7 +34,7 @@ function Catalog({ dataCard, onHandler }) {
           )}
         >
           <div>
-            <h4 className={styles.input}> {dataCard.title}</h4>
+            <h4 className={styles.input}> {dataCard.title || "Movie"}</h4>
             <img src={movie} alt="Movie" className={styles.img} />
           </div>
         </div>
