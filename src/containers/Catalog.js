@@ -5,6 +5,22 @@ import axios from "axios";
 import Form from "../components/Form/Form";
 import Select from "../components/Select/Select";
 import Paginator from "../components/paginator/paginator";
+
+function renderCards(pageActive, dataCards, onHandler, setCardsToRender) {
+    let cardsRender = [];
+    const firstItemOfPageActive = (pageActive - 1) * 20;
+    let lastItemOfPageActive = pageActive * 20;
+    if (lastItemOfPageActive > dataCards.length) {
+        lastItemOfPageActive = dataCards.length;
+    }
+    for (let i = firstItemOfPageActive; i < lastItemOfPageActive; i++) {
+        cardsRender.push(
+            <Card key={i} dataCard={dataCards[i]} onHandler={onHandler}/>
+        );
+    }
+    setCardsToRender(cardsRender);
+}
+
 function Catalog() {
   const [dataCards, setDataCards] = useState();
   const [viewForm, setViewForm] = useState(false);
@@ -37,18 +53,7 @@ function Catalog() {
       setCardSelected(dataSelected);
     };
     if (pageActive && pageActive !== 0) {
-      let cardsRender = [];
-      const firstItemOfPageActive = (pageActive - 1) * 20;
-      let lastItemOfPageActive = pageActive * 20;
-      if (lastItemOfPageActive > dataCards.length) {
-        lastItemOfPageActive = dataCards.length;
-      }
-      for (let i = firstItemOfPageActive; i < lastItemOfPageActive; i++) {
-        cardsRender.push(
-          <Card key={i} dataCard={dataCards[i]} onHandler={onHandler} />
-        );
-      }
-      setCardsToRender(cardsRender);
+        renderCards(pageActive, dataCards, onHandler, setCardsToRender);
     }
   }, [pageActive, dataCards, viewForm]);
 
@@ -59,8 +64,10 @@ function Catalog() {
        const dataCardsSort = dataCards.sort((a, b) => {
          return a[key] > b[key];
        });
-       console.log(dataCardsSort);
-       setDataCards(dataCardsSort);     }
+       setDataCards(dataCardsSort);
+         window.location.reload();
+
+     }
   };
 
   if (!dataCards) return <div>Is loading</div>;
