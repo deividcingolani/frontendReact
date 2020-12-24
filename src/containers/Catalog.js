@@ -57,8 +57,7 @@ function handleSort(
   return (e) => {
     const key = e.target.value.split("-")[0];
     const typeSorting = e.target.value.split("-")[1];
-    console.log(dataCards);
-    console.log(key, typeSorting);
+
     if (key !== "Select") {
       let dataCardsSort;
       if (typeSorting === "asc") {
