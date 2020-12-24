@@ -45,9 +45,9 @@ function Catalog({ dataCard, onHandler }) {
         >
           <div>
             <h4 className={styles.input}>Title: {dataCard.title}</h4>
-            <h2 className={styles.input}> Duration: {dataCard.duration} Min</h2>
+            <h2 className={styles.input}> Duration: {dataCard.duration} Mins</h2>
             <h2 className={styles.input}>
-              Date Published: {dataCard.yearOfPublished}
+              Date Published: {dataCard.yearOfPublished} Year
             </h2>
             <button
               className={styles.button}
