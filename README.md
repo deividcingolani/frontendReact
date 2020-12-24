@@ -6,6 +6,8 @@ https://github.com/deividcingolani/backendMovies
 
 Steps for start application
 
+In this case I use yarn, but you can use NPM or other package manager.
+
 1)Install dependencies 
 
     yarn install
