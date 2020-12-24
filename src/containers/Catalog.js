@@ -7,6 +7,14 @@ function Catalog() {
   const [dataCards, setDataCards] = useState();
   const [viewForm, setViewForm] = useState(false);
   const [dataCardSelected, setCardSelected] = useState(false);
+
+  const handleChange = (e) => {
+    const key = e.target.value;
+    const dataCardsSort = dataCards.sort((a, b) => {
+      return a[key] > b[key];
+    });
+    setDataCards(dataCardsSort);
+  };
   const onHandler = (dataSelected) => {
     setViewForm(!viewForm);
     setCardSelected(dataSelected);
@@ -36,7 +44,16 @@ function Catalog() {
       <Card key={i} dataCard={dataCards[i]} onHandler={onHandler} />
     );
   }
-  return <div className={styles.cards}>{cardsRender}</div>;
+  return (
+    <div>
+      <select name="OrderBy" onChange={(event) => handleChange(event)}>
+        <option value="Title">Title</option>
+        <option value="Duration">Duration</option>
+        <option value="Year">yearOfPublished</option>
+      </select>
+      <div className={styles.cards}>{cardsRender}</div>
+    </div>
+  );
 }
 
 export default Catalog;
