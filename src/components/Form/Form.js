@@ -9,7 +9,7 @@ function Form({ cardSelected, setViewForm }) {
     cardSelected.yearOfPublished
   );
   const [validateField, setValidateField] = useState(false);
-  const [error, setError] = useState(false);
+
   const [success, setSuccess] = useState(false);
 
   const handlerUpdateMovie = async () => {
@@ -20,7 +20,6 @@ function Form({ cardSelected, setViewForm }) {
       yearOfPublished > new Date().getFullYear()
     ) {
       setValidateField(true);
-      setError(true);
     } else {
       const body = {
         title,
@@ -35,10 +34,8 @@ function Form({ cardSelected, setViewForm }) {
       );
       if (status === 200) {
         setSuccess(true);
-        setError(false);
       } else {
         setSuccess(false);
-        setError(true);
       }
     }
   };
