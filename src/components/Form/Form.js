@@ -13,12 +13,10 @@ function Form({ cardSelected, setViewForm }) {
 
   const handlerUpdateMovie = async () => {
     if (
-      title.toString("") === "" ||
-      description.toString("") === "" ||
-      duration.toString("") === "" ||
-      duration === 0 ||
-      yearOfPublished.toString("") === "" ||
-      yearOfPublished === 0
+      title.trim() === "" ||
+      description.trim("") === "" ||
+      duration <= 50 ||
+      yearOfPublished > new Date().getFullYear()
     ) {
       setValidateField(true);
     } else {
@@ -53,7 +51,7 @@ function Form({ cardSelected, setViewForm }) {
           onChange={(e) => handleChange(e, setTitle)}
           className={styles.inputForm}
         />
-        {validateField && title.toString("") === "" && (
+        {validateField && title.trim("") === "" && (
           <div className={styles.errorInput}>This field is Required</div>
         )}
       </div>
@@ -66,7 +64,7 @@ function Form({ cardSelected, setViewForm }) {
           onChange={(e) => handleChange(e, setDescription)}
           className={styles.inputForm}
         />
-        {validateField && description.toString("") === "" && (
+        {validateField && description.trim("") === "" && (
           <div className={styles.errorInput}>This field is Required</div>
         )}
       </div>
