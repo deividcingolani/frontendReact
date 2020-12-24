@@ -5,6 +5,8 @@ function Select({ options, handleChange }) {
     return <option value={option.name}>{option.label}</option>;
   });
   return (
+     <div className={styles.selectDiv}>
+       <label className={styles.labelSelect}> Sorting By</label>
     <select
       name="OrderBy"
       onChange={(event) => handleChange(event)}
@@ -12,6 +14,7 @@ function Select({ options, handleChange }) {
     >
       {optionsRender}
     </select>
-  );
+  </div>
+       );
 }
 export default Select;

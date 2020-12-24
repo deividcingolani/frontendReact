@@ -53,13 +53,15 @@ function Catalog() {
   }, [pageActive, dataCards, viewForm]);
 
   const handleChangeSort = (e) => {
-    console.log(e);
+
     const key = e.target.value;
-    const dataCardsSort = dataCards.sort((a, b) => {
-      return a[key] > b[key];
-    });
-    console.log(dataCardsSort);
-    setDataCards(dataCardsSort);
+     if(key!=="Select"){
+       const dataCardsSort = dataCards.sort((a, b) => {
+         return a[key] > b[key];
+       });
+       console.log(dataCardsSort);
+       setDataCards(dataCardsSort);     }
+
   };
 
   if (!dataCards) return <div>Is loading</div>;
@@ -71,6 +73,10 @@ function Catalog() {
       <div>
         <Select
           options={[
+            {
+              name: "Select",
+              label: "Select..."
+            },
             {
               name: "Title",
               label: "Title",

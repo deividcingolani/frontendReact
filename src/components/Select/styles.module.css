@@ -21,8 +21,7 @@
     background-repeat: no-repeat, repeat;
     background-position: right .7em top 50%, 0 0;
     background-size: .65em auto, 100%;
-    margin: auto;
-    margin-bottom: 2rem;
+
 }
 .select::-ms-expand {
     display: none;
@@ -39,4 +38,14 @@
 }
 .select option {
     font-weight:normal;
+}
+.selectDiv{
+    display: flex;
+    align-content: center;
+    flex-direction: row;
+}
+
+.labelSelect{
+    margin-left: 25rem;
+    margin-right: 2rem;
 }
