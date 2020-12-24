@@ -67,7 +67,7 @@ function handleSort(
         });
       } else {
         dataCardsSort = dataCards.sort((a, b) => {
-          return a[key] > b[key];
+          return a[key] < b[key];
         });
       }
 
