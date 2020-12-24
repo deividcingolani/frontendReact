@@ -34,39 +34,44 @@ function Form({ cardSelected, setViewForm }) {
   };
   return (
     <div className={styles.form}>
-      My form
-      <label>
-        Title:
+      <div className={styles.divInputForm}>
+        <label className={styles.label}>Title</label>
         <input
           type="text"
           defaultValue={title}
           onChange={(e) => handleChange(e, setTitle)}
+          className={styles.inputForm}
         />
-      </label>
-      <label>
-        Description
+      </div>
+      <div className={styles.inputForm}>
+        <label className={styles.label}>Description</label>
+
         <input
           type="text"
           defaultValue={description}
           onChange={(e) => handleChange(e, setDescription)}
+          className={styles.inputForm}
         />
-      </label>
-      <label>
-        Duration
+      </div>
+      <div className={styles.inputForm}>
+        <label className={styles.label}>Duration</label>
         <input
           type="number"
           defaultValue={duration}
           onChange={(e) => handleChange(e, setDuration)}
+          className={styles.inputForm}
         />
-      </label>
-      <label>
-        Year Of Published
+      </div>
+      <div className={styles.inputForm}>
+        <label className={styles.label}>Year Of Published</label>
+
         <input
           type="text"
           defaultValue={yearOfPublished}
           onChange={(e) => handleChange(e, setYearOfPublished)}
+          className={styles.inputForm}
         />
-      </label>
+      </div>
       {error && <div>There was a problem with the update of the data</div>}
       <div className={styles.buttons}>
         <button onClick={() => setViewForm(false)}>Back to Catalog</button>

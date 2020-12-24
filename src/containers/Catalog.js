@@ -12,12 +12,18 @@ const onHandler=(dataSelected)=>{
   setCardSelected(dataSelected)
 
 }
-  useEffect(async () => {
-    const {data} = await axios(
-        'http://0.0.0.0:8000/api/movies/',
-    );
-    setDataCards(data)
+  useEffect( () => {
+    // eslint-disable-next-line no-unused-vars
+    async function fetchData() {
+      const {data} = await axios(
+          'http://0.0.0.0:8000/api/movies/',
+      );
+      setDataCards(data)
+
+    }
+
   },[]);
+
 
 
   if(!dataCards) return <div>Is loading</div>
