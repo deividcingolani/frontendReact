@@ -1,4 +1,4 @@
-import "./app.css";
+import "./App.css";
 import Catalog from "./containers/Catalog";
 
 function App() {

@@ -1,24 +1,88 @@
 import React, { useState } from "react";
-import styles from "./catalog.module.css";
-import Card from "../components/Card/Card";
 import axios from "axios";
+import styles from "./Catalog.module.css";
 import Form from "../components/Form/Form";
 import Select from "../components/Select/Select";
-import Paginator from "../components/paginator/paginator";
+import Paginator from "../components/Paginator/Paginator";
+import RenderCards from "../components/RenderCards/RenderCards";
 
-function renderCards(pageActive, dataCards, onHandler, setCardsToRender) {
-    let cardsRender = [];
-    const firstItemOfPageActive = (pageActive - 1) * 20;
-    let lastItemOfPageActive = pageActive * 20;
-    if (lastItemOfPageActive > dataCards.length) {
-        lastItemOfPageActive = dataCards.length;
+function callFetchMovies(setDataCards) {
+  axios("http://0.0.0.0:8000/api/movies/")
+    .then((response) => {
+      setDataCards(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+function setPages(dataCards, totalPages, setTotalPages, setPageActive) {
+  if (dataCards && totalPages === 0) {
+    setTotalPages(Math.ceil(dataCards.length / 20));
+    setPageActive(1);
+  }
+}
+
+function onHandlerMethod(setViewForm, viewForm, setCardSelected) {
+  return (dataSelected) => {
+    setViewForm(!viewForm);
+    setCardSelected(dataSelected);
+  };
+}
+
+function setViewFormAndRenderCards(
+  setViewForm,
+  viewForm,
+  setCardSelected,
+  pageActive,
+  dataCards,
+  setCardsToRender
+) {
+  const onHandler = onHandlerMethod(setViewForm, viewForm, setCardSelected);
+
+  if (pageActive && pageActive !== 0) {
+    RenderCards(pageActive, dataCards, onHandler, setCardsToRender);
+  }
+}
+
+function handleSort(
+  setViewForm,
+  viewForm,
+  setCardSelected,
+  dataCards,
+  setDataCards,
+  pageActive,
+  setCardsToRender
+) {
+  return (e) => {
+    const key = e.target.value.split("-")[0];
+    const typeSorting = e.target.value.split("-")[1];
+    console.log(key);
+    console.log(typeSorting);
+
+    if (key !== "Select") {
+      let dataCardsSort;
+      if (typeSorting === "asc") {
+        dataCardsSort = dataCards.sort((a, b) => {
+          return a[key] > b[key];
+        });
+      } else {
+        dataCardsSort = dataCards.sort((a, b) => {
+          return a[key] < b[key];
+        });
+      }
+
+      setDataCards(dataCardsSort);
+      setViewFormAndRenderCards(
+        setViewForm,
+        viewForm,
+        setCardSelected,
+        pageActive,
+        dataCards,
+        setCardsToRender
+      );
     }
-    for (let i = firstItemOfPageActive; i < lastItemOfPageActive; i++) {
-        cardsRender.push(
-            <Card key={i} dataCard={dataCards[i]} onHandler={onHandler}/>
-        );
-    }
-    setCardsToRender(cardsRender);
+  };
 }
 
 function Catalog() {
@@ -30,47 +94,40 @@ function Catalog() {
   let [cardsToRender, setCardsToRender] = useState();
 
   const fetchData = React.useCallback(() => {
-    axios("http://0.0.0.0:8000/api/movies/")
-      .then((response) => {
-        setDataCards(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    callFetchMovies(setDataCards);
   }, []);
+
   React.useEffect(() => {
     fetchData();
   }, [fetchData]);
+
   React.useEffect(() => {
-    if (dataCards && totalPages === 0) {
-      setTotalPages(Math.ceil(dataCards.length / 20));
-      setPageActive(1);
-    }
+    setPages(dataCards, totalPages, setTotalPages, setPageActive);
   }, [totalPages, dataCards]);
+
   React.useEffect(() => {
-    const onHandler = (dataSelected) => {
-      setViewForm(!viewForm);
-      setCardSelected(dataSelected);
-    };
-    if (pageActive && pageActive !== 0) {
-        renderCards(pageActive, dataCards, onHandler, setCardsToRender);
-    }
+    setViewFormAndRenderCards(
+      setViewForm,
+      viewForm,
+      setCardSelected,
+      pageActive,
+      dataCards,
+      setCardsToRender
+    );
   }, [pageActive, dataCards, viewForm]);
 
-  const handleChangeSort = (e) => {
-
-    const key = e.target.value;
-     if(key!=="Select"){
-       const dataCardsSort = dataCards.sort((a, b) => {
-         return a[key] > b[key];
-       });
-       setDataCards(dataCardsSort);
-         window.location.reload();
-
-     }
-  };
+  const handleChangeSort = handleSort(
+    setViewForm,
+    viewForm,
+    setCardSelected,
+    dataCards,
+    setDataCards,
+    pageActive,
+    setCardsToRender
+  );
 
   if (!dataCards) return <div>Is loading</div>;
+
   if (viewForm)
     return <Form cardSelected={dataCardSelected} setViewForm={setViewForm} />;
 
@@ -81,19 +138,31 @@ function Catalog() {
           options={[
             {
               name: "Select",
-              label: "Select..."
+              label: "Select...",
             },
             {
-              name: "Title",
-              label: "Title",
+              name: "title-desc",
+              label: "Title descendent",
             },
             {
-              name: "Duration",
-              label: "Duration",
+              name: "title-asc",
+              label: "Title Ascendent",
             },
             {
-              name: "yearOfPublished",
-              label: "Date Published",
+              name: "duration-asc",
+              label: "Duration Descendent",
+            },
+            {
+              name: "duration-desc",
+              label: "Duration Ascendent",
+            },
+            {
+              name: "yearOfPublished-asc",
+              label: "Date Published Ascendent",
+            },
+            {
+              name: "yearOfPublished-desc",
+              label: "Date Published Descendent",
             },
           ]}
           handleChange={handleChangeSort}

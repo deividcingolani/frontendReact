@@ -1,11 +1,11 @@
 import axios from "axios";
 
-for (let i = 0; i <50 ; i++) {
+for (let i = 0; i <8 ; i++) {
     const body = {
-        title: "My Movie",
-        description: "Description of Movie",
-        duration: 120,
-        yearOfPublished: 2020,
+        title: "My",
+        description: "documental",
+        duration: 200,
+        yearOfPublished: 2000+i,
     };
     axios
         .post("http://0.0.0.0:8000/api/movies/", body)
