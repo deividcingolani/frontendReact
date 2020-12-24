@@ -23,7 +23,7 @@ function Form({ cardSelected, setViewForm }) {
       body
     );
     if (status === 200) {
-      setViewForm(true);
+      setViewForm(false);
     } else {
       setError(true);
     }
