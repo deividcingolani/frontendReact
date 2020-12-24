@@ -78,8 +78,10 @@ function Form({ cardSelected, setViewForm }) {
           onChange={(e) => handleChange(e, setDuration)}
           className={styles.inputForm}
         />
-        {validateField && duration === 0 && (
-          <div className={styles.errorInput}>This field is Required</div>
+        {validateField && duration <= 50 && (
+          <div className={styles.errorInput}>
+            This field is Required and needs to be bigger than 50Mins
+          </div>
         )}
       </div>
       <div className={styles.divInputForm}>
@@ -91,13 +93,11 @@ function Form({ cardSelected, setViewForm }) {
           onChange={(e) => handleChange(e, setYearOfPublished)}
           className={styles.inputForm}
         />
-        {(validateField && yearOfPublished > new Date().getFullYear()) ||
-          (yearOfPublished < 2020 && (
-            <div className={styles.errorInput}>
-              The year of published needs to be lower or equal to the actual
-              year and bigger than 2020
-            </div>
-          ))}
+        {validateField && yearOfPublished > new Date().getFullYear() && (
+          <div className={styles.errorInput}>
+            The year of published needs to be lower or equal to the actual year
+          </div>
+        )}
       </div>
       {error && <div>There was a problem with the update of the data</div>}
       <div className={styles.buttons}>
