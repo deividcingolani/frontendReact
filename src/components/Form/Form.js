@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./styles.module.css";
+import styles from "./Form.module.css";
 import axios from "axios";
 function Form({ cardSelected, setViewForm }) {
   const [title, setTitle] = useState(cardSelected.title);

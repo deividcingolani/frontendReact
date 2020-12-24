@@ -1,4 +1,4 @@
-import styles from "./paginator.module.css";
+import styles from "./Paginator.module.css";
 function Paginator({ totalPages, pageActive, setPageActive }) {
   const renderPages = [];
   for (let i = 1; i < totalPages + 1; i++) {

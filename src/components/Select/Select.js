@@ -1,4 +1,4 @@
-import styles from "./styles.module.css";
+import styles from "./Select.module.css";
 
 function Select({ options, handleChange }) {
   const optionsRender = options.map((option) => {
